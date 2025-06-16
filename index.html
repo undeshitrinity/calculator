@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <!-- this section is for input field  -->
+        <div>  
+    <input type="number" id="display" placeholder="0"><br></div>
+
+        <!-- this  section is for thew integers  -->
+
+        <div class="Calculator">
+            <div>
+                <button>clear</button><button class="btn">1</button><button>2</button> <br>
+                <button>3</button><button>4</button><button class="btn">5</button> <br>
+                <button>6</button> <button>7</button><button>8</button> <br>
+                <button>9</button><button>0</button><button>=</button>
+            </div> 
+
+            <!-- this section is for the operators  -->
+
+            <div class="operators">
+                <button class="operator-items">*</button>
+                <button class="operator-items">-</button>
+                <button class="operator-items">/</button>
+                <button class="operator-items" id="plus">+</button>
+            </div>
+        </div> 
+    </main>
+
+<script>
+ // Get the input field
+const display = document.getElementById('display');
+
+// Variables to track input
+let currentInput = '';
+let operator = '';
+let firstOperand = null;
+
+// Basic math operations
+function addition(a, b) {
+    return a + b;
+}
+
+function subtraction(a, b) {
+    return a - b;
+}
+
+function multiplication(a, b) {
+    return a * b;
+}
+
+function division(a, b) {
+    if (b !== 0) {
+        return a / b;
+    } else {
+        return 'Error';
+    }
+}
+
+// Main button handling
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        const value = button.textContent;
+
+        // Check if value is a number
+        if (!isNaN(value)) {
+            currentInput += value;
+            display.value = currentInput;
+
+        // Check if value is +
+        } else if (value === '+') {
+            operator = '+';
+            firstOperand = parseFloat(currentInput);
+            currentInput = '';
+
+        // Check if value is -
+        } else if (value === '-') {
+            operator = '-';
+            firstOperand = parseFloat(currentInput);
+            currentInput = '';
+
+        // Check if value is *
+        } else if (value === '*') {
+            operator = '*';
+            firstOperand = parseFloat(currentInput);
+            currentInput = '';
+
+        // Check if value is /
+        } else if (value === '/') {
+            operator = '/';
+            firstOperand = parseFloat(currentInput);
+            currentInput = '';
+
+        // If value is =
+        } else if (value === '=') {
+            const secondOperand = parseFloat(currentInput);
+            let result;
+
+            if (operator === '+') {
+                result = addition(firstOperand, secondOperand);
+            } else if (operator === '-') {
+                result = subtraction(firstOperand, secondOperand);
+            } else if (operator === '*') {
+                result = multiplication(firstOperand, secondOperand);
+            } else if (operator === '/') {
+                result = division(firstOperand, secondOperand);
+            } else {
+                result = 'Error';
+            }
+
+            display.value = result;
+            currentInput = result.toString();
+
+        // If value is clear
+        } else if (value === 'clear') {
+            currentInput = '';
+            firstOperand = null;
+            operator = '';
+            display.value = '';
+        }
+    });
+});
+</script>
+
+
+     
+</body>
+</html>
+</body>
+</html>
